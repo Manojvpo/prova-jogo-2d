@@ -29,6 +29,20 @@ class Disparo extends Entidade{
             this.speed = 7;
     }
 atualizar(){
-    
+    this.y -= this.speed;
+    }
 }
+
+class Aliens extends Entidade{
+    constructor(x, y){
+        super(x, y, 40, 20, 'green');
+        this. direção = 1;
+    }
+atualizar(){
+    this.x += this.direção * 1;
+    if (this.x <= 0 || this.x + this.largura >= canvas.largura){
+            this.direção *= -1;
+            this.y += 20;
+        }
+    }
 }
