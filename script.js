@@ -2,7 +2,7 @@ const canvas = document.getElementById('JogoCanvas');
 const ctx = canvas.getContext('2d');
 
 class Entidade {
-    constructor(x, y, largura, altura, cor){
+    constructor(x, y, largura, altura, cor) {
         this.x = x;
         this.y = y;
         this.largura = largura;
@@ -50,7 +50,7 @@ class Alien extends Entidade {
         this.x += this.direcao * this.velocidade;
         if (this.x <= 0 || this.x + this.largura >= canvas.width) {
             this.direcao *= -1;
-            this.y += 30;
+            this.y += 50;  
         }
     }
 }
@@ -60,13 +60,16 @@ const disparos = [];
 const aliens = [];
 
 let gameOver = false;
-let pontuacao = 0; 
+let pontuacao = 0;
 
+const larguraAlien = 50;  
+const alturaAlien = 20;
+const velocidade = 1;
 
-const velocidade = 1; 
 for (let row = 0; row < 4; row++) {
     for (let col = 0; col < 8; col++) {
-        aliens.push(new Alien(30 + col * 45, 30 + row * 30, velocidade));
+       
+        aliens.push(new Alien(30 + col * larguraAlien, 30 + row * 50, velocidade));
     }
 }
 
@@ -93,7 +96,6 @@ function verificarColisaoAlienNave() {
             a.y < nave.y + nave.altura &&
             a.y + a.altura > nave.y
         ) {
-          
             gameOver = true;
             break;
         }
@@ -104,7 +106,6 @@ function verificarColisaoAlienChao() {
     for (let i = 0; i < aliens.length; i++) {
         const a = aliens[i];
         if (a.y + a.altura >= canvas.height - 40) {
-            
             gameOver = true;
             break;
         }
@@ -154,7 +155,6 @@ function loopJogo() {
         }
     }
 
-    
     verificarColisaoAlienNave();
     verificarColisaoAlienChao();
 
