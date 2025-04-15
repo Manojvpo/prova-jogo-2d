@@ -1,0 +1,1 @@
+Nessa prova eu tentei deixar o jogo mais próximo do verdadeiro, tive muitas dificuldades com erros. Meu jogo está fazendo um alien colidir com o outro e não consegui arrumar esse erro. 
