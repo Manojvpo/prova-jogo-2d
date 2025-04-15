@@ -60,10 +60,10 @@ const disparos = [];
 const aliens = [];
 
 let gameOver = false;
-let pontuacao = 0; // Variável para armazenar a pontuação
+let pontuacao = 0; 
 
-// Criar apenas uma vez os aliens iniciais
-const velocidade = 1; // Você pode ajustar a velocidade dos aliens se necessário
+
+const velocidade = 1; 
 for (let row = 0; row < 4; row++) {
     for (let col = 0; col < 8; col++) {
         aliens.push(new Alien(30 + col * 45, 30 + row * 30, velocidade));
@@ -93,7 +93,7 @@ function verificarColisaoAlienNave() {
             a.y < nave.y + nave.altura &&
             a.y + a.altura > nave.y
         ) {
-            // Alien colidiu com a nave
+          
             gameOver = true;
             break;
         }
@@ -104,7 +104,7 @@ function verificarColisaoAlienChao() {
     for (let i = 0; i < aliens.length; i++) {
         const a = aliens[i];
         if (a.y + a.altura >= canvas.height - 40) {
-            // Alien atingiu o chão
+            
             gameOver = true;
             break;
         }
@@ -119,7 +119,7 @@ function loopJogo() {
         ctx.font = "40px Arial";
         ctx.fillText("GAME OVER", canvas.width / 2 - 100, canvas.height / 2);
         ctx.fillText(`Pontuação: ${pontuacao}`, canvas.width / 2 - 100, canvas.height / 2 + 50);
-        return; // Fim do jogo, não continua o loop
+        return; 
     }
 
     if (keys['ArrowLeft']) nave.mover(-1);
@@ -148,17 +148,17 @@ function loopJogo() {
             ) {
                 aliens.splice(i, 1);
                 disparos.splice(j, 1);
-                pontuacao += 10; // Incrementa 10 pontos por alien destruído
+                pontuacao += 10;
                 break;
             }
         }
     }
 
-    // Verificar se o jogo terminou
+    
     verificarColisaoAlienNave();
     verificarColisaoAlienChao();
 
-    // Exibir a pontuação atual
+   
     ctx.fillStyle = "white";
     ctx.font = "20px Arial";
     ctx.fillText(`Pontuação: ${pontuacao}`, 10, 30);
