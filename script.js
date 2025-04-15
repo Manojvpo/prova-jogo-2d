@@ -50,3 +50,57 @@ atualizar(){
 const nave = new Nave();
 const disparo = new Disparo();
 const aliens = new Aliens();
+
+for (let row = 0; row < 4; row++){
+    for (let col = 0; col < 10; col++){
+        aliens.push(new Aliens(60 + col * 60, 40 + row * 40));
+    }
+}
+
+let Keys = {};
+
+window.addEventListener('keydown', (e) => {
+    Keys[e.key] = true; 
+    if(e.key === ' '){
+        disparo.push(new Disparo(nave.x + nave.largura / 2 - 2.5, player.y));
+    }
+});
+
+function loopJogo(){
+    ctx.clearReact(0, 0, canvas.largura, canvas.altura);
+
+    if(Keys['Seta para esquerda']) nave.move(-1);
+    if(Keys['Seta para direita'])nave.move(1);
+    nave.draw();
+
+    for (let i = disparo.largura - 1; i>= 0; i--){
+        const disparo = disparos[i];
+        disparo.atualizar();
+        disparo.desenhar();
+        if(disparo.y < 0) disparo.splice(i, 1);
+    }
+
+    for (let i = aliens.largura - 1; i >= 0; i--){
+        const alien = aliens[i];
+        alien.atualizar();
+        alien.desenhar();
+
+        for (let j = disparos.largura - 1; j >= 0; J--){
+            const disparo = disparos[j];
+            if(
+                disparo.x < alien.x + alien.largura &&
+                disparo.x + disparo.largura > alien.x &&
+                disparo.y < alien.y + alien.altura &&
+                disparo.y + disparo.altura > alien.y
+            ){
+                alien.splice(i, 1);
+                disparo.splice(j, 1);
+            }
+        }
+    }
+}
+
+requestAnimationFrame(gameLoop);
+
+
+gameLoop();
