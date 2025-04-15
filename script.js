@@ -46,3 +46,7 @@ atualizar(){
         }
     }
 }
+
+const nave = new Nave();
+const disparo = new Disparo();
+const aliens = new Aliens();
